@@ -37,13 +37,37 @@ node tools/make-demo-data.mjs    # паспорт школы и сценарии
 
 ## Проверки
 
-```bash
+```powershell
 node --test "tests/*.test.mjs"   # 22 теста движка и методики
 node tools/e2e.mjs               # 16 проверок интерфейса против живого сервера
 node tools/build-dist.mjs        # сборка сайта
 node tools/check-public-data.mjs # в сборке нет ФИО и реальных данных
 node tests/parity.mjs            # сверка с NetLogo (нужен results.csv)
 ```
+
+## Как обновить демо
+
+Одной командой (PowerShell, из папки проекта):
+
+```powershell
+powershell -File tools\publish.ps1 -Message "что изменилось"
+```
+
+Скрипт прогоняет тесты, собирает сайт, проверяет данные, коммитит и пушит.
+Если поднят локальный сервер — добавьте `-WithE2E`, тогда проверится и браузер.
+
+Вручную, по шагам (без `&&`: в Windows PowerShell 5.1 его нет):
+
+```powershell
+node --test "tests/*.test.mjs"
+node tools/build-dist.mjs
+node tools/check-public-data.mjs
+git add -A
+git commit -m "что изменилось"
+git push
+```
+
+Pages пересобирается сам за ~30 секунд, статус: `gh run list --limit 1`.
 
 ## Состав
 

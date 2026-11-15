@@ -1,4 +1,4 @@
-# Запуск порта в NetLogo без интерфейса (headless) и сверка с JS-движком.
+﻿# Запуск порта в NetLogo без интерфейса (headless) и сверка с JS-движком.
 #
 #   powershell -File netlogo\run-headless.ps1
 #

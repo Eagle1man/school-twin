@@ -1,0 +1,560 @@
+{
+  "meta": {
+    "name": "Демо-школа (условные данные)",
+    "version": "1.0",
+    "asOf": "2026-11-16",
+    "note": "Данные синтетические. Реальный паспорт школы подключается через CSV."
+  },
+  "calendar": {
+    "weeks": 8,
+    "days": 5,
+    "slotsPerDay": 7
+  },
+  "budget": {
+    "limit": 20000,
+    "hourRate": 600,
+    "substitutionRate": 700,
+    "overtimeFactor": 1.5
+  },
+  "classes": [
+    {
+      "id": "5А",
+      "grade": 5,
+      "students": 26
+    },
+    {
+      "id": "5Б",
+      "grade": 5,
+      "students": 27
+    },
+    {
+      "id": "6А",
+      "grade": 6,
+      "students": 28
+    },
+    {
+      "id": "6Б",
+      "grade": 6,
+      "students": 25
+    },
+    {
+      "id": "7А",
+      "grade": 7,
+      "students": 27
+    },
+    {
+      "id": "7Б",
+      "grade": 7,
+      "students": 26
+    },
+    {
+      "id": "8А",
+      "grade": 8,
+      "students": 25
+    },
+    {
+      "id": "8Б",
+      "grade": 8,
+      "students": 28
+    },
+    {
+      "id": "9А",
+      "grade": 9,
+      "students": 26
+    },
+    {
+      "id": "9Б",
+      "grade": 9,
+      "students": 27
+    },
+    {
+      "id": "10А",
+      "grade": 10,
+      "students": 24
+    },
+    {
+      "id": "11А",
+      "grade": 11,
+      "students": 22
+    }
+  ],
+  "teachers": [
+    {
+      "id": "T-001",
+      "name": "Учитель T-001",
+      "subjects": [
+        "math"
+      ],
+      "maxWeekly": 18,
+      "hourRate": 600,
+      "external": false,
+      "unavailable": []
+    },
+    {
+      "id": "T-002",
+      "name": "Учитель T-002",
+      "subjects": [
+        "math"
+      ],
+      "maxWeekly": 18,
+      "hourRate": 600,
+      "external": false,
+      "unavailable": []
+    },
+    {
+      "id": "T-003",
+      "name": "Учитель T-003",
+      "subjects": [
+        "math"
+      ],
+      "maxWeekly": 18,
+      "hourRate": 600,
+      "external": false,
+      "unavailable": []
+    },
+    {
+      "id": "T-004",
+      "name": "Учитель T-004",
+      "subjects": [
+        "math"
+      ],
+      "maxWeekly": 18,
+      "hourRate": 600,
+      "external": false,
+      "unavailable": []
+    },
+    {
+      "id": "T-005",
+      "name": "Учитель T-005",
+      "subjects": [
+        "rus",
+        "lit"
+      ],
+      "maxWeekly": 18,
+      "hourRate": 600,
+      "external": false,
+      "unavailable": []
+    },
+    {
+      "id": "T-006",
+      "name": "Учитель T-006",
+      "subjects": [
+        "rus",
+        "lit"
+      ],
+      "maxWeekly": 18,
+      "hourRate": 600,
+      "external": false,
+      "unavailable": []
+    },
+    {
+      "id": "T-007",
+      "name": "Учитель T-007",
+      "subjects": [
+        "rus",
+        "lit"
+      ],
+      "maxWeekly": 18,
+      "hourRate": 600,
+      "external": false,
+      "unavailable": []
+    },
+    {
+      "id": "T-008",
+      "name": "Учитель T-008",
+      "subjects": [
+        "rus",
+        "lit"
+      ],
+      "maxWeekly": 18,
+      "hourRate": 600,
+      "external": false,
+      "unavailable": []
+    },
+    {
+      "id": "T-009",
+      "name": "Учитель T-009",
+      "subjects": [
+        "eng"
+      ],
+      "maxWeekly": 18,
+      "hourRate": 600,
+      "external": false,
+      "unavailable": []
+    },
+    {
+      "id": "T-010",
+      "name": "Учитель T-010",
+      "subjects": [
+        "eng"
+      ],
+      "maxWeekly": 18,
+      "hourRate": 600,
+      "external": false,
+      "unavailable": []
+    },
+    {
+      "id": "T-011",
+      "name": "Учитель T-011",
+      "subjects": [
+        "eng"
+      ],
+      "maxWeekly": 18,
+      "hourRate": 600,
+      "external": false,
+      "unavailable": []
+    },
+    {
+      "id": "T-012",
+      "name": "Учитель T-012",
+      "subjects": [
+        "hist",
+        "geo"
+      ],
+      "maxWeekly": 18,
+      "hourRate": 600,
+      "external": false,
+      "unavailable": []
+    },
+    {
+      "id": "T-013",
+      "name": "Учитель T-013",
+      "subjects": [
+        "hist",
+        "geo"
+      ],
+      "maxWeekly": 18,
+      "hourRate": 600,
+      "external": false,
+      "unavailable": []
+    },
+    {
+      "id": "T-014",
+      "name": "Учитель T-014",
+      "subjects": [
+        "bio",
+        "chem"
+      ],
+      "maxWeekly": 18,
+      "hourRate": 600,
+      "external": false,
+      "unavailable": []
+    },
+    {
+      "id": "T-015",
+      "name": "Учитель T-015",
+      "subjects": [
+        "bio",
+        "chem"
+      ],
+      "maxWeekly": 18,
+      "hourRate": 600,
+      "external": false,
+      "unavailable": []
+    },
+    {
+      "id": "T-016",
+      "name": "Учитель T-016",
+      "subjects": [
+        "phys"
+      ],
+      "maxWeekly": 18,
+      "hourRate": 600,
+      "external": false,
+      "unavailable": []
+    },
+    {
+      "id": "T-017",
+      "name": "Учитель T-017",
+      "subjects": [
+        "phys"
+      ],
+      "maxWeekly": 18,
+      "hourRate": 600,
+      "external": false,
+      "unavailable": []
+    },
+    {
+      "id": "T-018",
+      "name": "Учитель T-018",
+      "subjects": [
+        "inf"
+      ],
+      "maxWeekly": 18,
+      "hourRate": 600,
+      "external": false,
+      "unavailable": []
+    },
+    {
+      "id": "T-019",
+      "name": "Учитель T-019",
+      "subjects": [
+        "inf"
+      ],
+      "maxWeekly": 18,
+      "hourRate": 600,
+      "external": false,
+      "unavailable": []
+    },
+    {
+      "id": "T-020",
+      "name": "Учитель T-020",
+      "subjects": [
+        "pe"
+      ],
+      "maxWeekly": 18,
+      "hourRate": 600,
+      "external": false,
+      "unavailable": []
+    },
+    {
+      "id": "T-021",
+      "name": "Учитель T-021",
+      "subjects": [
+        "pe"
+      ],
+      "maxWeekly": 18,
+      "hourRate": 600,
+      "external": false,
+      "unavailable": []
+    },
+    {
+      "id": "T-022",
+      "name": "Учитель T-022",
+      "subjects": [
+        "pe"
+      ],
+      "maxWeekly": 18,
+      "hourRate": 600,
+      "external": false,
+      "unavailable": []
+    },
+    {
+      "id": "T-023",
+      "name": "Учитель T-023",
+      "subjects": [
+        "art",
+        "tech"
+      ],
+      "maxWeekly": 18,
+      "hourRate": 600,
+      "external": false,
+      "unavailable": []
+    },
+    {
+      "id": "T-024",
+      "name": "Учитель T-024",
+      "subjects": [
+        "hist",
+        "geo"
+      ],
+      "maxWeekly": 18,
+      "hourRate": 600,
+      "external": false,
+      "unavailable": []
+    }
+  ],
+  "rooms": [
+    {
+      "id": "101",
+      "capacity": 30,
+      "type": "general"
+    },
+    {
+      "id": "102",
+      "capacity": 30,
+      "type": "general"
+    },
+    {
+      "id": "103",
+      "capacity": 30,
+      "type": "general"
+    },
+    {
+      "id": "104",
+      "capacity": 30,
+      "type": "general"
+    },
+    {
+      "id": "105",
+      "capacity": 30,
+      "type": "general"
+    },
+    {
+      "id": "106",
+      "capacity": 30,
+      "type": "general"
+    },
+    {
+      "id": "107",
+      "capacity": 30,
+      "type": "general"
+    },
+    {
+      "id": "108",
+      "capacity": 30,
+      "type": "general"
+    },
+    {
+      "id": "109",
+      "capacity": 30,
+      "type": "general"
+    },
+    {
+      "id": "110",
+      "capacity": 30,
+      "type": "general"
+    },
+    {
+      "id": "111",
+      "capacity": 30,
+      "type": "general"
+    },
+    {
+      "id": "112",
+      "capacity": 30,
+      "type": "general"
+    },
+    {
+      "id": "113",
+      "capacity": 30,
+      "type": "general"
+    },
+    {
+      "id": "114",
+      "capacity": 30,
+      "type": "general"
+    },
+    {
+      "id": "115",
+      "capacity": 30,
+      "type": "general"
+    },
+    {
+      "id": "116",
+      "capacity": 30,
+      "type": "general"
+    },
+    {
+      "id": "СЗ-1",
+      "capacity": 45,
+      "type": "gym"
+    },
+    {
+      "id": "ИНФ-1",
+      "capacity": 28,
+      "type": "computer"
+    },
+    {
+      "id": "ХИМ-1",
+      "capacity": 28,
+      "type": "chem"
+    },
+    {
+      "id": "ФИЗ-1",
+      "capacity": 28,
+      "type": "phys"
+    },
+    {
+      "id": "ТЕХ-1",
+      "capacity": 28,
+      "type": "workshop"
+    },
+    {
+      "id": "АКТ-1",
+      "capacity": 60,
+      "type": "general"
+    }
+  ],
+  "plan": {
+    "5": {
+      "math": 5,
+      "rus": 5,
+      "lit": 2,
+      "eng": 3,
+      "hist": 2,
+      "geo": 1,
+      "bio": 1,
+      "art": 1,
+      "pe": 3,
+      "tech": 2
+    },
+    "6": {
+      "math": 5,
+      "rus": 5,
+      "lit": 2,
+      "eng": 3,
+      "hist": 2,
+      "geo": 1,
+      "bio": 1,
+      "art": 1,
+      "pe": 3,
+      "tech": 2
+    },
+    "7": {
+      "math": 5,
+      "rus": 4,
+      "lit": 2,
+      "eng": 3,
+      "hist": 2,
+      "geo": 2,
+      "bio": 2,
+      "phys": 2,
+      "pe": 3,
+      "inf": 1,
+      "tech": 1
+    },
+    "8": {
+      "math": 5,
+      "rus": 4,
+      "lit": 2,
+      "eng": 3,
+      "hist": 2,
+      "geo": 2,
+      "bio": 2,
+      "phys": 2,
+      "chem": 2,
+      "pe": 3,
+      "inf": 1
+    },
+    "9": {
+      "math": 5,
+      "rus": 3,
+      "lit": 2,
+      "eng": 3,
+      "hist": 2,
+      "geo": 2,
+      "bio": 2,
+      "phys": 2,
+      "chem": 2,
+      "pe": 3,
+      "inf": 2
+    },
+    "10": {
+      "math": 5,
+      "rus": 2,
+      "lit": 2,
+      "eng": 3,
+      "hist": 2,
+      "geo": 1,
+      "bio": 1,
+      "phys": 2,
+      "chem": 2,
+      "inf": 2,
+      "pe": 3
+    },
+    "11": {
+      "math": 5,
+      "rus": 2,
+      "lit": 2,
+      "eng": 3,
+      "hist": 2,
+      "geo": 1,
+      "bio": 2,
+      "phys": 2,
+      "chem": 2,
+      "inf": 2,
+      "pe": 3
+    }
+  }
+}

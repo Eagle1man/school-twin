@@ -1,0 +1,13 @@
+dist/
+node_modules/
+*.log
+out.txt
+test.out.txt
+e2e.out.txt
+shot-*.png
+serve.out.log
+serve.err.log
+netlogo/results.csv
+
+# Реальные данные школы: только у человека, в git не попадают.
+data/real/

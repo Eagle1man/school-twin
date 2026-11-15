@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Цифровой двойник школы</title>
+<meta name="description" content="Управленческие сценарии, песочница и серии экспериментов на модели ресурсов школы" />
+<link rel="stylesheet" href="assets/style.css" />
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">
+    <h1>Цифровой двойник школы</h1>
+    <p class="sub">Модель ресурсов · демонстрационный паспорт · данные условные</p>
+  </div>
+  <div class="run-meta">
+    <label class="seed">seed
+      <input id="seed" type="text" value="demo" spellcheck="false" />
+    </label>
+    <span id="run-id" class="badge badge-muted" title="Идентификатор прогона: sha256 от данных, seed и решений">прогон не выполнен</span>
+  </div>
+</header>
+
+<nav class="tabs" role="tablist">
+  <button class="tab active" data-tab="trainer">Тренажёр</button>
+  <button class="tab" data-tab="sandbox">Песочница</button>
+  <button class="tab" data-tab="experiment">Эксперимент</button>
+  <button class="tab" data-tab="method">Методика</button>
+</nav>
+
+<main>
+  <section id="view-trainer" class="view active">
+    <div class="grid-3">
+      <div class="stack">
+        <div class="card">
+          <h2>Сценарий</h2>
+          <div id="scenario-list" class="scenario-list"></div>
+          <div id="scenario-brief" class="brief"></div>
+        </div>
+        <div class="card">
+          <h2>Школа</h2>
+          <dl id="school-facts" class="facts"></dl>
+          <details class="details">
+            <summary>Ограничения модели</summary>
+            <ul id="constraint-list" class="small"></ul>
+          </details>
+        </div>
+      </div>
+
+      <div class="stack">
+        <div class="card">
+          <h2>Затронутые занятия</h2>
+          <div id="affected-summary" class="muted">Выберите сценарий</div>
+          <div class="table-wrap">
+            <table id="affected-table" class="table"></table>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2>Решение руководителя</h2>
+          <div id="policy-list" class="policy-list"></div>
+          <label class="field">
+            <span>Обоснование решения</span>
+            <textarea id="explanation" rows="3" placeholder="Почему выбран этот вариант? Что вы проверили перед выбором?"></textarea>
+          </label>
+          <div class="actions">
+            <button id="btn-solve" class="btn btn-primary">Рассчитать последствия</button>
+            <button id="btn-reset" class="btn">Сбросить</button>
+          </div>
+          <p id="solve-hint" class="hint">Расчёт выполняется по тем же правилам для всех вариантов.</p>
+        </div>
+      </div>
+
+      <div class="stack">
+        <div class="card" id="assistant-card" hidden>
+          <h2>Цифровой помощник</h2>
+          <div id="assistant-body"></div>
+        </div>
+        <div class="card">
+          <h2>Журнал действий</h2>
+          <ol id="journal-list" class="journal"></ol>
+          <div class="actions">
+            <button id="btn-journal-json" class="btn btn-small">Журнал JSON</button>
+            <button id="btn-journal-csv" class="btn btn-small">Журнал CSV</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="results" class="card card-wide" hidden>
+      <h2>Последствия решения</h2>
+      <div id="metric-cards" class="metric-cards"></div>
+      <div id="violations" class="violations"></div>
+    </div>
+
+    <div id="comparison" class="card card-wide" hidden>
+      <div class="card-head">
+        <h2>Сравнение альтернатив</h2>
+        <p class="muted">Одно состояние школы и один seed. Разница — только в решении.</p>
+      </div>
+      <div class="table-wrap"><table id="comparison-table" class="table"></table></div>
+      <div id="comparison-chart" class="chart"></div>
+    </div>
+
+    <div id="profile" class="card card-wide" hidden>
+      <h2>Маркеры методики</h2>
+      <p class="muted">Это перечень наблюдаемых действий для эксперта. Итоговый вывод делает человек, а не программа.</p>
+      <div id="profile-grid" class="profile-grid"></div>
+      <div class="actions">
+        <button id="btn-export-run" class="btn btn-small">Выгрузить прогон</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="view-sandbox" class="view">
+    <div class="grid-2">
+      <div class="card">
+        <h2>Параметры</h2>
+        <div id="sandbox-controls" class="controls"></div>
+        <div class="actions">
+          <button id="btn-sandbox" class="btn btn-primary">Пересчитать</button>
+        </div>
+        <p class="hint">Любая идея проверяется на одном и том же расписании: меняются только параметры.</p>
+      </div>
+      <div class="card">
+        <h2>Результат</h2>
+        <div id="sandbox-metrics" class="metric-cards compact"></div>
+        <div id="sandbox-violations" class="violations"></div>
+      </div>
+    </div>
+    <div class="grid-2">
+      <div class="card">
+        <h2>Расписание класса</h2>
+        <div class="controls inline">
+          <label>класс <select id="sandbox-class"></select></label>
+          <label>неделя <select id="sandbox-week"></select></label>
+        </div>
+        <div class="table-wrap"><table id="timetable" class="table timetable"></table></div>
+        <div class="legend">
+          <span><i class="dot dot-held"></i> проведено</span>
+          <span><i class="dot dot-sub"></i> замена</span>
+          <span><i class="dot dot-moved"></i> перенесено</span>
+          <span><i class="dot dot-merged"></i> объединено</span>
+          <span><i class="dot dot-missed"></i> не проведено</span>
+          <span><i class="dot dot-free"></i> окно</span>
+        </div>
+      </div>
+      <div class="card">
+        <h2>Нагрузка учителей</h2>
+        <div class="table-wrap"><table id="load-table" class="table"></table></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="view-experiment" class="view">
+    <div class="card">
+      <h2>Серия прогонов</h2>
+      <div class="controls inline" id="experiment-controls">
+        <label>развёртка <select id="sweep"></select></label>
+        <label>повторов на точку <input id="repeats" type="number" min="1" max="200" value="20" /></label>
+        <label>базовый seed <input id="exp-seed" type="text" value="series" /></label>
+      </div>
+      <div id="policy-checks" class="checks"></div>
+      <div class="actions">
+        <button id="btn-series" class="btn btn-primary">Запустить серию</button>
+        <button id="btn-series-csv" class="btn" disabled>Скачать CSV</button>
+      </div>
+      <p class="hint">Серия показывает не одно число, а распределение: min / медиана / max по повторам.</p>
+    </div>
+
+    <div id="series-result" class="card card-wide" hidden>
+      <h2 id="series-title">Результаты серии</h2>
+      <div class="table-wrap"><table id="series-table" class="table"></table></div>
+      <div id="series-chart" class="chart"></div>
+      <p id="series-note" class="hint"></p>
+    </div>
+  </section>
+
+  <section id="view-method" class="view">
+    <div class="card">
+      <h2>Что считается и как</h2>
+      <div class="grid-2">
+        <div>
+          <h3>Показатели</h3>
+          <ul class="list">
+            <li><b>Непроведённые занятия</b> — запланированные часы, которые не состоялись.</li>
+            <li><b>Дополнительная нагрузка</b> — часы сверх недельной нормы учителя и её разброс.</li>
+            <li><b>Затраты</b> — замены по ставке часа и доплата за переработку.</li>
+            <li><b>Нарушения ограничений</b> — двойные назначения, вместимость, квалификация, бюджет.</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Воспроизводимость</h3>
+          <ul class="list">
+            <li>Правила школы одинаковы для всех вариантов и участников.</li>
+            <li>Прогон определяется парой «паспорт + seed + действия»; от неё считается идентификатор.</li>
+            <li>Никакого коэффициента, который улучшает результат по профилю участника, в модели нет.</li>
+            <li>Рекомендации помощника — данные; их проверка идёт по актуальному паспорту, а не по снимку.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <h2>Шесть компонентов цифрового сознания</h2>
+      <div id="method-components" class="profile-grid"></div>
+    </div>
+    <div class="card">
+      <h2>Границы применимости</h2>
+      <ul class="list">
+        <li>Норма часов, стоимость замены и правила — параметры, а не истина: их подтверждает школа.</li>
+        <li>Модель не предсказывает реальность, пока прогноз не сверен с фактическими данными четверти.</li>
+        <li>Перенос занятия считается бесплатным: цена переноса (программа, окна) в модели пока не выражена.</li>
+        <li>Маркеры методики — свидетельства для эксперта, а не оценка и не балл.</li>
+      </ul>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <span id="footer-info">Данные условные. Персональные данные учителей в модель не включаются.</span>
+</footer>
+
+<script type="module" src="src/ui/app.js"></script>
+</body>
+</html>

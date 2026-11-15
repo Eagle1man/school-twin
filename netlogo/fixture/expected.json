@@ -1,0 +1,42 @@
+{
+  "fixture": {
+    "week": 2,
+    "lessons": 317,
+    "disrupted": 34
+  },
+  "policies": {
+    "cancel": {
+      "lessonsMissed": 34,
+      "extraHours": 0,
+      "costTotal": 0,
+      "violations": 0,
+      "week": {
+        "missed": 34,
+        "extra": 0,
+        "cost": 0
+      }
+    },
+    "substitute": {
+      "lessonsMissed": 0,
+      "extraHours": 0,
+      "costTotal": 23800,
+      "violations": 1,
+      "week": {
+        "missed": 0,
+        "extra": 0,
+        "cost": 23800
+      }
+    },
+    "reassign": {
+      "lessonsMissed": 16,
+      "extraHours": 9,
+      "costTotal": 2700,
+      "violations": 3,
+      "week": {
+        "missed": 16,
+        "extra": 9,
+        "cost": 2700
+      }
+    }
+  }
+}

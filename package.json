@@ -1,0 +1,13 @@
+{
+  "name": "school-twin",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Цифровой двойник школы: управленческие сценарии, песочница и серии экспериментов",
+  "scripts": {
+    "serve": "node tools/serve.mjs . 8081",
+    "test": "node --test \"tests/*.test.mjs\"",
+    "data": "node tools/make-demo-data.mjs",
+    "build": "node tools/build-dist.mjs"
+  }
+}

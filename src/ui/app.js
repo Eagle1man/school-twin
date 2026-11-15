@@ -490,10 +490,11 @@ function renderComparison(alts, run) {
   barChart(
     $('comparison-chart'),
     alts.map((a) => ({
-      label: a.label.length > 22 ? `${a.label.slice(0, 20)}…` : a.label,
+      label: a.label,
       value: a.metrics.lessonsMissed,
       color: a.policy === (run?.policy || state.policy) ? '#1f4e79' : '#9db8ce',
     })),
+    { unit: ' зан.' },
   );
   void base;
 }

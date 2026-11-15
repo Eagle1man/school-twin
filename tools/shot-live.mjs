@@ -1,0 +1,10 @@
+import { chromium } from 'playwright';
+const b = await chromium.launch();
+const p = await b.newPage({ viewport: { width: 1500, height: 1000 } });
+await p.goto('https://eagle1man.github.io/school-twin/', { waitUntil: 'networkidle' });
+await p.click('#btn-solve');
+await p.waitForSelector('#metric-cards .metric');
+await p.waitForTimeout(400);
+await p.screenshot({ path: 'live-demo.png', fullPage: true });
+await b.close();
+console.log('снимок живого сайта готов');

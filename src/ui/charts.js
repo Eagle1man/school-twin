@@ -9,35 +9,34 @@ function el(name, attrs = {}, text) {
   return node;
 }
 
-export function barChart(container, items, { width = 720, height = 240, unit = '' } = {}) {
+// Горизонтальные полосы: длинные подписи вариантов читаются целиком,
+// а не обрезаются на «Только пере…».
+export function barChart(container, items, { width = 720, unit = '' } = {}) {
   container.innerHTML = '';
   if (!items.length) return;
-  const pad = { top: 20, right: 16, bottom: 66, left: 64 };
+  const rowH = 34;
+  const barH = 20;
+  const pad = { top: 8, right: 64, bottom: 8, left: 210 };
+  const height = items.length * rowH + pad.top + pad.bottom;
   const w = width - pad.left - pad.right;
-  const h = height - pad.top - pad.bottom;
   const max = Math.max(1, ...items.map((i) => i.value));
   const svg = el('svg', { viewBox: `0 0 ${width} ${height}`, role: 'img' });
-  for (let i = 0; i <= 4; i++) {
-    const y = pad.top + (h * i) / 4;
-    svg.appendChild(el('line', { x1: pad.left, x2: pad.left + w, y1: y, y2: y, stroke: '#e6ecf3' }));
+
+  items.forEach((item, i) => {
+    const y = pad.top + i * rowH;
+    const barW = Math.max(item.value > 0 ? 2 : 0, (item.value / max) * w);
     svg.appendChild(
       el(
         'text',
-        { x: pad.left - 8, y: y + 4, 'text-anchor': 'end', 'font-size': 11, fill: '#7b8794' },
-        String(Math.round(max - (max * i) / 4)),
+        { x: pad.left - 10, y: y + barH - 4, 'text-anchor': 'end', 'font-size': 11.5, fill: '#16202c' },
+        item.label,
       ),
     );
-  }
-  const step = w / items.length;
-  const barW = Math.min(64, step * 0.6);
-  items.forEach((item, i) => {
-    const x = pad.left + step * i + (step - barW) / 2;
-    const barH = (item.value / max) * h;
     const rect = el('rect', {
-      x,
-      y: pad.top + h - barH,
+      x: pad.left,
+      y,
       width: barW,
-      height: Math.max(1, barH),
+      height: barH,
       rx: 4,
       fill: item.color || '#2f6fa8',
     });
@@ -46,22 +45,8 @@ export function barChart(container, items, { width = 720, height = 240, unit = '
     svg.appendChild(
       el(
         'text',
-        { x: x + barW / 2, y: pad.top + h - barH - 5, 'text-anchor': 'middle', 'font-size': 11, fill: '#16202c' },
-        String(item.value),
-      ),
-    );
-    svg.appendChild(
-      el(
-        'text',
-        {
-          x: x + barW / 2,
-          y: pad.top + h + 18,
-          'text-anchor': 'end',
-          'font-size': 11,
-          fill: '#4a5a6a',
-          transform: `rotate(-22 ${x + barW / 2} ${pad.top + h + 18})`,
-        },
-        item.label.length > 12 ? `${item.label.slice(0, 11)}…` : item.label,
+        { x: pad.left + barW + 8, y: y + barH - 4, 'font-size': 11.5, fill: '#4a5a6a' },
+        `${item.value}${unit}`,
       ),
     );
   });
